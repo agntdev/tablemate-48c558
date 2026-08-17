@@ -1,19 +1,42 @@
 [
   {
-    "name": "Book a table",
+    "name": "Booking flow collects details and handles unavailable storage",
     "steps": [
       {
         "expect": [
           {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Initiates booking flow for guests"
-            }
+            "method": "editMessageText",
+            "payload": { "text": "Pick the day you'd like to visit." }
           }
         ],
         "send": {
           "callback": "booking:start"
         }
+      }
+      ,
+      {
+        "send": { "callback": "booking:date:2026-08-17" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "Choose a time for Mon, Aug 17." } }]
+      },
+      {
+        "send": { "callback": "booking:time:19:00" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "How many guests are coming?" } }]
+      },
+      {
+        "send": { "callback": "booking:party:2" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "What name should we put on the reservation?" } }]
+      },
+      {
+        "send": { "text": "Alex Guest" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "Share a phone number or email so the restaurant can reach you if needed." } }]
+      },
+      {
+        "send": { "text": "alex@example.com" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "Review your table for 2:\nMon, Aug 17 at 19:00\nName: Alex Guest\nContact: alex@example.com" } }]
+      },
+      {
+        "send": { "callback": "booking:confirm" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "Reservations are not set up yet. Ask the restaurant to finish its booking setup." } }]
       }
     ]
   }
