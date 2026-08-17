@@ -6,9 +6,7 @@
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Opens owner dashboard for managing reservations"
-            }
+            "payload": { "text": "Owner access isn't set up yet." }
           }
         ],
         "send": {
