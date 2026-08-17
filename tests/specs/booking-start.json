@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Book a table",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Initiates booking flow for guests"
+            }
+          }
+        ],
+        "send": {
+          "callback": "booking:start"
+        }
+      }
+    ]
+  }
+]
